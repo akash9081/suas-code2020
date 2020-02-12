@@ -36,12 +36,13 @@ print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
 
 import json
-with open('gps_cor.json') as p:
+with open('gps_cor_suas.json') as p:
         data2 = json.load(p)
-corr=data2["JTT"][0]["track"]["segments"][1]
+#corr=data2["JTT"][0]["track"]["segments"][1]
+corr=data2["waypoints"]
 a=[]
 for i in corr:
-    a.append([i[0],i[1],i[4]])
+    a.append([i["latitude"],i["longitude"],i["altitude"]])
 
 def get_distance_metres(aLocation1, aLocation2):
     """
