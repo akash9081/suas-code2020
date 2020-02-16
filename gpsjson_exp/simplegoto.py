@@ -27,7 +27,7 @@ sitl = None
 # Start SITL if no connection string specified
 if not connection_string:
     import dronekit_sitl
-    sitl = dronekit_sitl.start_default()
+    sitl = dronekit_sitl.start_default(lat=38.145206, lon=-76.428473)
     connection_string = sitl.connection_string()
 
 
@@ -36,9 +36,8 @@ print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=True)
 
 import json
-with open('gps_cor_suas.json') as p:
+with open('new_gps.json') as p:
         data2 = json.load(p)
-#corr=data2["JTT"][0]["track"]["segments"][1]
 corr=data2["waypoints"]
 a=[]
 for i in corr:
@@ -137,6 +136,7 @@ for ji in range(len(a)):
     while(distance_to_current_waypoint(point)>=0.5):
         print('hello')
         print("distance to current way point is : ",distance_to_current_waypoint(point))
+        time.sleep(1)
     print('yahan pe rukega ye 3 sec ke lie')
     time.sleep(3)
     print('3 sec pure hue')
